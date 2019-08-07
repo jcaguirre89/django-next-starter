@@ -15,6 +15,8 @@ class Command(BaseCommand):
             # Only run if Debug=True (so it's not run in production environments, as this is only useful for dev)
             print('Creating database...')
             self._create()
+            return
+        print('Not it debug mode, so not creating db')
 
     @staticmethod
     def _create():
