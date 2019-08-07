@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'graphene_django',
     'api',
     'users',
 ]
@@ -131,3 +132,7 @@ CORS_ORIGIN_WHITELIST = (
 CSRF_TRUSTED_ORIGINS = (
     'localhost:3000',
 )
+
+GRAPHENE = {
+    'SCHEMA': 'backend.schema.schema'
+}
