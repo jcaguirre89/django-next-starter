@@ -50,3 +50,4 @@ class Query(object):
             return MyModel.objects.get(pk=id)
 
         return None
+

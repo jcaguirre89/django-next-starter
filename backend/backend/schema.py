@@ -7,4 +7,5 @@ class Query(APIQuery, graphene.ObjectType):
     # This class will inherit from multiple Queries
     pass
 
+
 schema = graphene.Schema(query=Query)
