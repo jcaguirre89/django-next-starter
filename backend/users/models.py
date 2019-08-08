@@ -38,6 +38,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=150, blank=True)
     date_joined = models.DateTimeField(auto_now_add=True)
+    is_contractor = models.BooleanField(default=True)
+    is_vendor = models.BooleanField(default=False)
     is_staff = models.BooleanField(
         _('staff status'),
         default=False,
@@ -74,19 +76,23 @@ class Profile(models.Model):
     User input data
     DEMOGRAPHICS
     """
-    age = models.PositiveSmallIntegerField(blank=True, null=True)
+    PA = 'pa'
+    NY = 'ny'
+    MY = 'my'
+    VA = 'va'
+
+    STATES = (
+        (PA, 'Pennsylvania'),
+        (NY, 'New York'),
+        (MY, 'Maryland'),
+        (VA, 'Virginia'),
+    )
+
+    company = models.CharField(max_length=300, blank=True)
+    address = models.CharField(max_length=500, blank=True)
+    state = models.CharField(max_length=2, blank=True)
+    postal_code = models.CharField(max_length=20, blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'Profile for {self.user.email}'
-
-
-
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
-
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()

@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'graphene_django',
     'api',
     'users',
 ]
@@ -133,6 +132,6 @@ CSRF_TRUSTED_ORIGINS = (
     'localhost:3000',
 )
 
-GRAPHENE = {
-    'SCHEMA': 'backend.schema.schema'
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
